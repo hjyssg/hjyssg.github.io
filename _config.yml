@@ -1,36 +1,34 @@
-title:            Site Title
-description:      Describe your website.
+title:            HJY
+description:      HJY's blog
 # Your site's domain goes here. Leave localhost server or blank when working locally.
-url:              http://localhost:4000
+url:              http://hjyssg.github.io/
 disqus_shortname: 
 
 # Owner/author information
 owner:
-  name:           Your Name
+  name:           HJY
   avatar:         bio-photo.jpg
-  bio:            "Describe your self."
-  email:          your@email.com
+  bio:            "A Code Lover."
+  email:          huangjunyang47@gmail.com
   # Social networking links are used in author-bio sidebar. Update and remove as you like.
-  twitter:        
-  facebook:       
-  github:         
-  stackoverflow: 
-  linkedin:       
-  instagram:      
-  lastfm:         
-  tumblr: 
-  pinterest: 
-  foursquare: 
-  steam: 
-  dribbble: 
-  # For Google Authorship https://plus.google.com/authorship
-  google_plus:
+  github:   https://github.com/hjyssg      
+#   stackoverflow: 
+#   linkedin:       
+#   instagram:      
+#   lastfm:         
+#   tumblr: 
+#   pinterest: 
+#   foursquare: 
+#   steam: 
+#   dribbble: 
+#   # For Google Authorship https://plus.google.com/authorship
+#   google_plus:
 
-# Analytics and webmaster tools stuff goes here
-google_analytics:   
-google_verify:      
-# https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
-bing_verify:        
+# # Analytics and webmaster tools stuff goes here
+# google_analytics:   
+# google_verify:      
+# # https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
+# bing_verify:        
 
 # Links to include in top navigation
 # For external links add external: true
@@ -41,9 +39,9 @@ links:
     url: /posts/
   - title: Theme Setup
     url: /theme-setup/
-  - title: Made Mistakes
-    url: http://mademistakes.com
-    external: true
+  # - title: Made Mistakes
+  #   url: http://mademistakes.com
+  #   external: true
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    America/New_York
