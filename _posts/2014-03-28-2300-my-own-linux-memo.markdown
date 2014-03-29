@@ -25,7 +25,6 @@ find / -mmin -10
 -type x [df]
 {% endhighlight %}
 
-
 1. egrep:  
 {% highlight bash %}
 egrep -r "text1|text2” directory-path 
