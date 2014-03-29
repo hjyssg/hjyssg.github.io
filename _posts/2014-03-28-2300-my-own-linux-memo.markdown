@@ -43,11 +43,11 @@ egrep -r "redeem reward" /home/tom/
    git clone --bare URL 
 
 
-7. replace the 'f**k' of all text files in the directory with "lovely"
-   find . -type f  |egrep "\.txt$" |xargs sed -i -e 's/fuck/lovely/g'
-   #replacing with Chinese word is also feasible
-   find . -type f  |egrep "\.txt$" |xargs sed -i -e 's/fuck/亲爱的/g'
-   #having zero-extension ‘’ after -i will have no backup, as sed -i '' -e 'patten'   
+7. replace the 'f**k' of all text files in the directory with "lovely"  
+   find . -type f  |egrep "\.txt$" |xargs sed -i -e 's/fuck/lovely/g'  
+   \#replacing with Chinese word is also feasible  
+   find . -type f  |egrep "\.txt$" |xargs sed -i -e 's/fuck/亲爱的/g'  
+   \#having zero-extension ‘’ after -i will have no backup, as sed -i '' -e 'patten'     
 
 
     
