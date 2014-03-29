@@ -15,7 +15,7 @@ some linux commands I found useful
 2. find:  
 {% highlight bash %}
 find PATH OPTION [-exec COMMAND { } \;]  
-find / -type f -mtime -7 | xargs tar -rf weekly_incremental.tar  
+find / -type f -mtime -7 | xargs tar -rf weekly_incremental.tar   
 find . \(-name a.out -o -name ‘*.o’\)> -atime +7 -exec cat {} \;   
 find PATH OPTION |	grep "pattern"  
 find –name "filename-with-wildcard"  
@@ -41,3 +41,14 @@ egrep -r "redeem reward" /home/tom/
 
 6. git clone  user_name@cs1520.cs.pitt.edu:public/csweb  
    git clone --bare URL 
+
+
+7. replace the 'f**k' of all text files in the directory with "lovely"
+   find . -type f  |egrep "\.txt$" |xargs sed -i -e 's/fuck/lovely/g'
+   #replacing with Chinese word is also feasible
+   find . -type f  |egrep "\.txt$" |xargs sed -i -e 's/fuck/亲爱的/g'
+   #having zero-extension ‘’ after -i will have no backup, as sed -i '' -e 'patten'   
+
+
+    
+
