@@ -12,7 +12,7 @@ some linux commands I found useful
 
 1. None can remember all, so we ["cheat"](https://github.com/chrisallenlane/cheat)!
 
-1. find:  
+2. find:  
 {% highlight bash %}
 find PATH OPTION [-exec COMMAND { } \;]  
 find / -type f -mtime -7 | xargs tar -rf weekly_incremental.tar  
@@ -25,7 +25,7 @@ find / -mmin -10
 -type x [df]
 {% endhighlight %}
 
-1. egrep:  
+3. egrep:  
 {% highlight bash %}
 egrep -r "text1|text2” directory-path 
 egrep "text string to search” directory-path     
@@ -34,10 +34,10 @@ egrep -r "redeem reward" /home/tom/
 -F, --fixed-strings  fgrep 
 {% endhighlight %}
 
-1. ls -lha
+4. ls -lha
    ls -R 
 
-1. unzip *.zip
+5. unzip *.zip
 
-1. git clone  user_name@cs1520.cs.pitt.edu:public/csweb  
+6. git clone  user_name@cs1520.cs.pitt.edu:public/csweb  
    git clone --bare URL 
