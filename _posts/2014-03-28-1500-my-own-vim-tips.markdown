@@ -1,0 +1,30 @@
+---
+layout: post
+title:  "My own vim tips"
+description: "a small memo about how to use vim"
+date:   2014-03-28 20:33:00
+categories: tech
+---
+
+This is a small memo about how to use vim.
+
+
+1. The easiest way set up vim is to use other people's configuration.
+For example, [vimrc](https://github.com/amix/vimrc) is very good and you should take  a look.
+
+1. For Mac, install iterm2. The defualt terminal does not work very well with vim. To use the mouse, insert 'set mouse=a' in ".vimrs". 
+ 
+1. In vim, select text using mouse while pressing option key, then you can copy by CMD + C  
+
+1. format all code: gg = G
+
+1. search / and stop searching :noh  
+
+1. replace 0, $ s/a/b/gci
+
+1. tab can be used to autocomplete command
+
+1. useful pulgin:  tag_list, TlistOpen, NERDTree, MRU, conque 
+
+1. enter shell  ":shell"
+
