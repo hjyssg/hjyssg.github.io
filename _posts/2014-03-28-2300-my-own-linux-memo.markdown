@@ -10,14 +10,14 @@ some linux commands I found useful
 
 [A useful website that explains flag one by one](http://explainshell.com/)
 
-1. None can remember all, so we ["cheat"](https://github.com/chrisallenlane/cheat)!
+* None can remember all, so we ["cheat"](https://github.com/chrisallenlane/cheat)!
 
-2. find:  
+* find:  
 {% highlight bash %}
 find PATH OPTION [-exec COMMAND { } \;]  
 find / -type f -mtime -7 | xargs tar -rf weekly_incremental.tar   
 find . \(-name a.out -o -name ‘*.o’\)> -atime +7 -exec cat {} \;   
-find PATH OPTION |	grep "pattern"  
+find PATH1 PATH2 OPTION |	egrep "pattern"  
 find –name "filename-with-wildcard"  
 find !–name "filename-with-wildcard-that-want-exclude"  
 find / -mmin -10   
@@ -25,7 +25,7 @@ find / -mmin -10
 -type x [df]
 {% endhighlight %}
 
-3. egrep:  
+* egrep:  
 {% highlight bash %}
 egrep -r "text1|text2” directory-path 
 egrep "text string to search” directory-path     
@@ -34,20 +34,33 @@ egrep -r "redeem reward" /home/tom/
 -F, --fixed-strings  fgrep 
 {% endhighlight %}
 
-4. ls -lha
+* ls -lha
    ls -R 
 
-5. unzip *.zip
+* unzip *.zip
 
-6. git clone  user_name@cs1520.cs.pitt.edu:public/csweb  
+* git clone  user_name@cs1520.cs.pitt.edu:public/csweb  
    git clone --bare URL 
 
+*  text replacing
+{% highlight bash %}
+#replace the 'f**k' of all text files in the directory with "lovely"     
+find . -type f  |egrep "\.txt$" |xargs sed -i -e 's/fuck/lovely/g'  
+#replacing with Chinese word is also feasible  
+find . -type f  |egrep "\.txt$" |xargs sed -i -e 's/fuck/亲爱的/g'  
+#having zero-extension ‘’ after -i will have no backup, as sed -i '' -e 'patten'  
+{% endhighlight %}
 
-7. replace the 'f**k' of all text files in the directory with "lovely"  
-   find . -type f  |egrep "\.txt$" |xargs sed -i -e 's/fuck/lovely/g'  
-   \#replacing with Chinese word is also feasible  
-   find . -type f  |egrep "\.txt$" |xargs sed -i -e 's/fuck/亲爱的/g'  
-   \#having zero-extension ‘’ after -i will have no backup, as sed -i '' -e 'patten'     
+* mkdir -p a/long/directory/path
+  Make directory including intermediate directories
+
+* cd -
+  change to the previous working directory
+
+*  $_ or !$: the last argument of the previous command.
+   Ctrl+U to clear up to the beginning.
+   Ctrl+K to delete to the end of line
+   Ctrl+Y yank
 
 
     
