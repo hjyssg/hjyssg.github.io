@@ -1,0 +1,53 @@
+---
+layout: post
+title: 'iOS tutorial: Create a Subclass of UIView with xib'
+categories:
+- Technical Notes
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+---
+In this tutorial, I will create a subclass of UIView with xib.
+In iOS, UI can be created by purely code or xib.
+
+Personally, I always prefer xib. It is WYSIWYG and easy to update or modify.
+if you create UI pure programmatically, it will be hundreds lines of code. And you will need to do geometry to layout the subviews. Using pure code is tedious and difficult to maintain (You are not able to see the UI until you launch the app).
+
+Check the <a href="https://github.com/juh42/SubclassUIViewExample">project</a> on my github
+
+<!--more-->
+let's begin the tutorial.
+First, create a new iOS Single View project. Name it whatever you like. I name my own "SubclassUIViewExample".
+
+Then, create a new subclass of UIView called "HJYView".
+Different from create subclass of UIViewController, it does not come with a xib file.
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/07/create-h-m-file.png"><img class="alignnone size-medium wp-image-119" alt="create h m file" src="http://www.hjyssg.com/wp-content/uploads/2013/07/create-h-m-file.png" /></a>
+
+Create a empty xib file, name it as "HJYView", same as .h and .m files just created.
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/07/create-xib-file.png"><img class="alignnone size-medium wp-image-118" alt="create xib file" src="http://www.hjyssg.com/wp-content/uploads/2013/07/create-xib-file.png" /></a>
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/07/create-xib-file-2.png"><img class="alignnone size-medium wp-image-117" alt="create xib file 2" src="http://www.hjyssg.com/wp-content/uploads/2013/07/create-xib-file-2.png" /></a>
+
+Go to the interface builder page, put a white UIView and name it "HJYView" on the custom class tab. It is very important, otherwise the app will crash when it launches.<a href="http://www.hjyssg.com/wp-content/uploads/2013/07/interface-builder.png"><img class="alignnone size-medium wp-image-116" alt="interface builder" src="http://www.hjyssg.com/wp-content/uploads/2013/07/interface-builder.png" /></a>
+
+Put some UIs into the UIView. I put two UILabel and one UITextField. You can put anything you want in your project.Remove Autolayout if you want iOS 5.0 compatibility.
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/07/xib.png"><img class="alignnone size-medium wp-image-112" alt="xib" src="http://www.hjyssg.com/wp-content/uploads/2013/07/xib.png" /></a><a href="http://www.hjyssg.com/wp-content/uploads/2013/07/Screen-Shot-2013-07-02-at-11.43.24-AM.png"><img class="alignnone size-medium wp-image-115" alt="Screen Shot 2013-07-02 at 11.43.24 AM" src="http://www.hjyssg.com/wp-content/uploads/2013/07/Screen-Shot-2013-07-02-at-11.43.24-AM.png" /></a>
+
+Connect outlet between XIB and .h file by click UI while holding ctrl-key.
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/07/outlet.png"><img class="alignnone size-medium wp-image-109" alt="outlet" src="http://www.hjyssg.com/wp-content/uploads/2013/07/outlet.png" /></a>
+
+Then go to HJYView.m file and write some code.
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/07/Screen-Shot-2013-07-02-at-12.00.38-PM.png"><img class="alignnone size-medium wp-image-113" alt="Screen Shot 2013-07-02 at 12.00.38 PM" src="http://www.hjyssg.com/wp-content/uploads/2013/07/Screen-Shot-2013-07-02-at-12.00.38-PM.png" /></a>
+
+When I type something into inputTextFiled, outputLabel will display the same text with a random color.
+
+Finally, go to HJYViewController.m file to add the custom view.
+
+Command+R, run the simulator. Done!
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/07/result-1.png"><img class="alignnone size-medium wp-image-111" alt="result 1" src="http://www.hjyssg.com/wp-content/uploads/2013/07/result-1.png" /></a>
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/07/result-2.png"><img class="alignnone size-medium wp-image-110" alt="result 2" src="http://www.hjyssg.com/wp-content/uploads/2013/07/result-2.png" /></a>
+
+Also, remember to set the autoresizingMake on xib if you want the view display the UIVIew correctly in different kind of size of screens.
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/07/autoresizingmask.png"><img class="alignnone size-medium wp-image-114" alt="autoresizingmask" src="http://www.hjyssg.com/wp-content/uploads/2013/07/autoresizingmask.png" /></a>

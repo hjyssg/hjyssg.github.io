@@ -1,0 +1,40 @@
+---
+layout: post
+title: My Co-op experience with Philips Healthcare (January.2012 - May.2012)
+categories:
+- Co-op Experience
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+---
+My first Co-op rotation is with <a href="http://www.healthcare.philips.com/us_en/">Philips Healthcare</a> from January to May 2012. During the 4-month Co-op, I made two iPad apps for ultrasound machine marketing.  I mainly use Objective-C and rely on C to improve the file loading performance. The platform I worked on is MAC OSX.
+
+<strong><!--more-->Attention: <a href="http://www.healthcare.philips.com/us_en/">Philips Healthcare</a> released my apps as company-inside apps, no available on App store. </strong>
+
+<b>The First iPad App</b>
+The first App has fancy UI and 3D model display. 
+I did not have any iOS experience before this project. So I had to learn Objective-C at first and then iOS SDK. I learned by my own, with the help from my mentor.
+
+I built the UI structure by using UITabBarController. Different pages had different marketing content. One is to display the 3D model from ultrasound machine by OpenGL ES.
+
+3D model file loading optimization. The original 3D file was written in ASCII. Loading the file and convert it into integer array took more 5 seconds. I wrote a C program to convert the original file into binary format. Also, I changed the iOS file-loading code to read both ASCII and binary format. After the optimization, the file loading took less than half second.
+
+There was a quite interesting bug. The 3D file could be displayed properly on MAC PC. But it caused a Linux preview program crash. It turned out that the crash is caused by <b>Endianness difference</b>. The file is saved as small endian, while that Linux preview program reads the file same big-endian. Then, I created a C program that used "ntohl", "htonl" to convert endianness.
+<b>
+</b>
+
+<b>The Second APP</b>
+The App displays video and image files from ultrasound machine. So marketing people cab use it to show product to customers. The app needs to be able to update its contents easily, hard-coding content need to be avoided.  All related information (i.e the tile of video, the path of picture files) is stored in a XML file. Right after the app launch, it parses the XML file and creates all UI elements programmatically.
+
+Also, I tried to add downloading function to the app. So the app can download new video and image files from the server. The downloading function needs to written in multithread and must to be able handle all kinds of network situations. I did not have enough time to finish it.
+
+Of course, This feature won't be any difficulty for me now. There are many ways to do the FTP or HTTP download in iOS. One Way is  to use NSURLRequest Class with GCP (grand central dispatch). Or using some external API.
+
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/05/1.png"><img class="alignnone size-medium wp-image-20" alt="1" src="http://www.hjyssg.com/wp-content/uploads/2013/05/1.png" /></a>
+ <a href="http://www.hjyssg.com/wp-content/uploads/2013/05/2.png"><img class="alignnone size-medium wp-image-21" alt="2" src="http://www.hjyssg.com/wp-content/uploads/2013/05/2.png" /></a>
+ <a href="http://www.hjyssg.com/wp-content/uploads/2013/05/3.png"><img class="alignnone size-medium wp-image-23" alt="3" src="http://www.hjyssg.com/wp-content/uploads/2013/05/3.png" /></a>
+ <a href="http://www.hjyssg.com/wp-content/uploads/2013/05/51.png"><img class="alignnone size-medium wp-image-25" alt="5" src="http://www.hjyssg.com/wp-content/uploads/2013/05/51.png"  /></a>
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/05/4.png"><img class="size-medium wp-image-24 alignleft" alt="4" src="http://www.hjyssg.com/wp-content/uploads/2013/05/4.png" /></a>

@@ -1,0 +1,78 @@
+---
+layout: post
+title: 'Sqlite3 notes: a pitfall of sqlite3_close'
+categories:
+- Technical Notes
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  _syntaxhighlighter_encoded: '1'
+---
+I had an interesting bug today, when I used SQlite C interface. Take a look at the following code:
+ <!--more-->
+[code lang="c"]
+    char *query[100];
+    sprintf(query, &quot;SELECT PROFILE FROM profileTable WHERE ID=%i&quot;, id);
+    
+    sqlite3 *DB = sqlite3_open(....); 
+    sqlite3_stmt *statement;
+    char *profile = nil;
+    if (sqlite3_prepare_v2(DB, query,-1, &amp;statement, nil) == SQLITE_OK)
+    {
+        while (sqlite3_step(statement) == SQLITE_ROW)
+        {
+             profile = (char *)sqlite3_column_text(statement, 0);
+        }
+    }
+
+    sqlite3_finalize(statement);
+    sqlite3_close(profileDB);
+                
+    if(profile==nil)
+    {
+        sqlite3_close(profileDB);
+        return;
+    }
+    else if(strlen(profile)&lt;=0)
+    {
+        sqlite3_close(profileDB);
+        return;
+    }
+
+    //some further operation on the string
+    //operations...
+    //operations...
+[/code]
+
+
+It crashed on strlen(profile)=0 for EXE_BAD_ACCESS. It took me about two hours to find that it was something wrong with sqlite. How I fixed it? Just move sqlite3_close down as:
+[code lang="c"]
+
+    //Omission. The same as above
+     
+    sqlite3_finalize(statement);
+    //sqlite3_close(profileDB); move it after operation code!!
+       
+    if(profile==nil)
+    {
+        sqlite3_close(profileDB);
+        return;
+    }
+    else if(strlen(profile)&lt;=0)
+    {
+        sqlite3_close(profileDB);
+        return;
+    }
+
+    //some further operation on the string
+    //operations...
+    //operations...
+
+    //close sqlite DB when all calculation is done
+    sqlite3_close(profileDB);
+[/code]
+
+Reason: sqlite3_close frees all memory of the sqlite DB and makes "profile" points to a illegal address. Then strlen will try to access a illegal address and get the signal.

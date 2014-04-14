@@ -1,0 +1,53 @@
+---
+layout: post
+title: My Co-op experience with Compunetix part1 (January.2013-May.2013)
+categories:
+- Co-op Experience
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+---
+My second and third Co-op rotation is from January to August 2013 with <a href="http://www.compunetix.com/ix/index.php">Compunetix</a>. I separated them into two posts. Part 1 is from January to May. Part 2 is from May to August.
+
+<a href="http://www.compunetix.com/ix/index.php">Compunetix</a> is a telecommunication company. I was in video system division. I was hired mainly to develop iOS apps for video conference control.
+
+<!--more-->
+
+<strong>The First App iWOC</strong>
+My first App is called "iWOC". It is iOS client to control the video conference. 
+Video conferencing is different from  one-to-one video chat, e.g, skype, facetime. Video conferencing is used by companies rather than individuals. Setting up and controlling a video conference require a control server.  iWOC connects to the control server via HTTP and sends requests wrapped in JSON.
+
+
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/05/Architecture.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/05/Architecture.png" alt="Architecture" class="alignnone size-medium wp-image-164" /></a>
+
+<strong> HTTP,JSON and REST</strong>
+iWOC sends HTTP asynchronous requests to the server. e.g creating a conference, adding endpoint to a conference, changing a conference video setting.<li>All parameters were wrapped inside a JSON object.  I used <a title="JSONKit" href="https://github.com/johnezang/JSONKit" target="_blank">JSONKit</a> to create and parse JSON string.</li>
+<li> NSURLConnection and NSURLConnection API are used to send HTTP request.</li>
+<li>The control server does not keep the state of the iWOC. The sent requests include all necessary data needed by the server.</li>
+<li>The control server provides one single URI address for iWOC to send requests.</li>
+Based on the above characteristic, I can conclude that iWOC is a <a href="http://www.ibm.com/developerworks/webservices/library/ws-restful/">REST (Representational state transfer) client</a>. 
+
+<strong>Event Notification Push</strong>
+To inform clients the change of the conference in realtime, the server usually will push an event notification to the client and the client should change the UI accordingly. The problem was that iOS does not support AJAX push the way JQuery does.
+I hacked it by making iWOC send the "listEvent" request to the server and asking if there is any event periodically. After receiving the response from the server, the app will send a new "listEvent" request to ask if there is any event .
+It is like:
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/05/httpar.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/05/httpar.png" alt="httpar"  class="alignnone size-medium wp-image-98" /></a>
+
+<strong>the UI screenshot</strong>
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/05/iwoc-login.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/05/iwoc-login.png" alt="iwoc login" class="alignnone size-medium wp-image-200" /></a>
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/05/iwoc-homepage.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/05/iwoc-homepage.png" alt="iwoc homepage"  class="alignnone size-medium wp-image-195" /></a>
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/05/iwoc-contact-page.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/05/iwoc-contact-page.png" alt="iwoc contact page" class="alignnone size-medium wp-image-194" /></a>
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/05/iwoc-conference-menu.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/05/iwoc-conference-menu.png" alt="iwoc conference menu" class="alignnone size-medium wp-image-191" /></a>
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/05/iwoc-conferent-pop-view.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/05/iwoc-conferent-pop-view.png" alt="iwoc conferent pop view" class="alignnone size-medium wp-image-193" /></a>
+
+
+<strong>Translation Project</strong>
+There were two software inside Compunetix whose interface were translated into Chinese and Japanese by Google Translation. The translation quality was basically unreadable.
+I spent two weeks to translate them into Chinese and Japanese on my own. 
+<strong>Translation File Parsing</strong>
+All my translation files were saved as .docx. It was difficult for my co-workers to use it.
+I saved the file as XML and wrote a python command tool. The python command tool parsed the XML file and generated text files. I used <a title="beautiful soup" href="http://www.crummy.com/software/BeautifulSoup/" target="_blank">Beautiful Soup</a> for parsing. 
+Beautiful Soup parses the XML file and returns a nice XML tree. The program then just does the tree traversal and extract the information. It then saves information into text file.

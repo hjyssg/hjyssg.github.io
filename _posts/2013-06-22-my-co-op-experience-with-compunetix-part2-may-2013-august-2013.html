@@ -1,0 +1,68 @@
+---
+layout: post
+title: My Co-op experience with Compunetix part2 (May.2013-August.2013)
+categories:
+- Co-op Experience
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  _syntaxhighlighter_encoded: '1'
+---
+In my last Co-op rotation(May to August), I continued working on iOS and built AVerEG.
+<a href="http://www.averusa.com/">AVer</a> is the partner company with  <a href="http://www.compunetix.com/ix/index.php">Compunetix</a>.
+This app, AVerEG has two main requirements: 
+1. Connecting to Aver video conference terminal and functioning as a remote control.
+2. Providing the same conference control features as iWOC.
+This app combine two companys' products together, so it is called AVerEG, AVer + EG.
+
+<!--more-->
+<strong>Remote Control</strong>
+the UI mimics the real remote control. A model object connect to the 
+video terminal via raw TCP socket and send plain text as command. TCP does not have the nice request-response mechanism as HTTP. Special attention is paid to make callback synchronized. 
+
+<strong>Conference Control</strong>
+I reuse iWOC code. When I created iWOC, I followed the MVC architecture strictly. Reusing its code is fairy easy. 
+
+<strong>The Challenge</strong>
+The challenge of AverEG is the software engineering challenge. The UI were changed multiple times. New requirement are added. By the end, the whole project is about 15,000 lines of code. 
+I used GIT to control the version carefully. When I totally screw up, I revert to the previous commit.
+I also optimized the design to reduce the number of files and code. 
+
+<strong>the UI screenshot</strong>
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/06/remote-control.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/06/remote-control-624x832.png" alt="remote control" width="450" height="600" class="alignnone size-medium wp-image-204" /></a>
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/06/lanscape.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/06/lanscape-500x375.png" alt="lanscape" width="500" height="375" class="alignnone size-medium wp-image-211" /></a>
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/06/iphone.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/06/iphone.png" alt="iphone" width="358" height="702" class="alignnone size-full wp-image-210" /></a>
+
+
+<strong>iPad/iPhone compatible</strong>
+Xib files and UI elements are used carefully to make the app layout nice on both iPhone and iPad. I created a subclass of UIScrollview to allow a UIViewController to display two child UIViewController full screen at portrait orientation and half-by-half at landscape orientation. 
+After done with AverEG, I go back to iWOC and made it iPad/iPhone compatible as well. 
+I created a small <a href="http://www.hjyssg.com/os-tutorial-create-a-subclass-of-uiview-with-xib/">tutorial</a> teaching how to create a custom view with Xib.
+
+<strong>User Info Persistence</strong>
+I used<a href=" https://github.com/soffes/sskeychain">sskeychain</a>, a nice keychain Objective-C wrapper.  I created a NSDictionary to hold user info and save it into keychain as a JSON string. The saving/loading is only 4 lines.
+
+[code]
+  //Info saving code 
+   NSString *userInfoText = [userInfo JSONString];  //I used to JSON to save object 
+   [SSKeychain setPassword:userInfoText forService:MY_LOGIN_SERVICE account:MY_ACCOUNT];
+
+    //Info loading code
+    NSString * loginInfoStr = [SSKeychain passwordForService:MY_LOGIN_SERVICE account:MY_ACCOUNT];
+    NSDictionary *loginInfo = [loginInfoStr objectFromJSONString];   //get object from JSON
+
+[/code]
+
+
+
+
+-------
+<strong>software engineering development flow</strong>
+
+During my Co-op in Compunetix, I followed the standard software engineering development flow for my projects. I wrote the requirements and the design. I then implemented the app. I tested it and did the code review with my co-worker.
+
+Compunetix use ClearCase for version control, but ClearCase is only available on Windows and I did all my projects on MAC. 
+So I used Git during development, only used ClearCase when I checked and delivered. Git have enough features for me. I like it/

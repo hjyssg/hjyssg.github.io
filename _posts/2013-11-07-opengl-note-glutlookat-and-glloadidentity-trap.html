@@ -1,0 +1,33 @@
+---
+layout: post
+title: 'Opengl Note: glutLookAt and glLoadIdentity Trap'
+categories:
+- Technical Notes
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+  _syntaxhighlighter_encoded: '1'
+---
+A tricky bug of my openGl project. Considering following code:
+<!--more-->
+[code lang="c"]
+glMatrixMode(GL_PROJECTION);
+glLoadIdentity();
+gluPerspective(fovy, aspect, near, far); 
+glMatrixMode(GL_MODELVIEW)
+gluLookAt(posX, posY, posZ,
+          lookAtX, lookAtY, lookAtZ, 
+          upX, upY, upZ);
+draw_object_a();
+glPushMatrix();
+glLoadIdentity();
+draw_object_b();
+glPopMatrix();
+[/code]
+<p>Object A will render normal, while Object B will not, Why?</p>
+<p>glutLookAt and glLoadIdentity both apply matrix transformation on the top matrix of modelView stack.After glLookAt called, the camera transformation is applied to matrix. But glLoadIdentity will simply replace it with a identity matrix. </p>
+<p>So B will render without camera transformation, A will. </p>
+<p>**Note B will still render with perspective transformation since projection matrix wasn't touched by glLoadIdentity</p>

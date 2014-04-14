@@ -1,0 +1,29 @@
+---
+layout: post
+title: '[OpenMp Notes] Set Up IDE On Windows and Mac'
+categories:
+- Technical Notes
+tags: []
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '1'
+---
+A brief note about how to setup ide for openmp.
+
+Windows:
+<strong>Visual studio</strong>:   In solution configuration c++ language setting, there is a "openmp enable" setting.
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/11/QQ截图20131128160917.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/11/QQ截图20131128160917.png" alt="QQ截图20131128160917" width="1224" height="724" class="alignnone size-full wp-image-281" /></a>
+<a href="http://orwelldevcpp.blogspot.com/2012/09/dev-c-5300-released.html">
+<strong>Dev C++</strong></a>:  In 5.3.0.0, they add support of openmp. In compiler option, choose TDM-GCC, add " -fopenmp" flag to the linker command.<a href="http://www.hjyssg.com/wp-content/uploads/2013/11/QQ截图20131128160553.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/11/QQ截图20131128160553.png" alt="QQ截图20131128160553" width="1012" height="752" class="alignnone size-full wp-image-282" /></a>
+
+Mac:
+<strong>xCode</strong>: It seems that only 4.* xcode has g++ that support openMP. If you already updated to xcode 5, download old version xcode <a href="https://developer.apple.com/downloads/index.action">here</a>. You may need an apple developer account to enter the webpage. You can have multiple versions of xcode as long as you put them in different folders.
+In target setting, change compiler to gcc,
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/11/Screen-Shot-2013-11-28-at-5.01.09-PM.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/11/Screen-Shot-2013-11-28-at-5.01.09-PM.png" alt="Screen Shot 2013-11-28 at 5.01.09 PM" width="662" height="457" class="alignnone size-full wp-image-292" /></a>
+then search "openMp" and enable the flag.
+<a href="http://www.hjyssg.com/wp-content/uploads/2013/11/Screen-Shot-2013-11-28-at-4.06.45-PM.png"><img src="http://www.hjyssg.com/wp-content/uploads/2013/11/Screen-Shot-2013-11-28-at-4.06.45-PM.png" alt="Screen Shot 2013-11-28 at 4.06.45 PM" width="857" height="464" class="alignnone size-full wp-image-283" /></a>
+
+
+
